@@ -1,0 +1,23 @@
+.header {
+    min-height: 94px;
+}
+
+.header::after {
+    /* content: '';
+    background-color: #fff;
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+    content: " ";
+    display: block;
+    position: absolute;
+    height: 5px;
+    background:white;
+    width: 40px;
+    left: 100%;
+    top: calc(50% - 2px);
+}
