@@ -2,3 +2,21 @@
     background-color: #000;
     padding: 45px 199px 60px;
 }
+
+@media screen and (max-width: 1024px) {
+  .page {
+    padding: 45px 100px 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding: 45px 50px 60px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .page {
+    padding: 28px 0 36px;
+  }
+}
