@@ -3,11 +3,16 @@
   background-color: #000;
   width: 24px;
   height: 24px;
+  background-image: url(../../images/edit-icon.png);
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: center;
 }
 
 @media screen and (max-width: 425px) {
   .editButton {
     width: 18px;
     height: 18px;
+    background-size: 7.5px;
   }
 }
