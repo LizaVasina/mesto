@@ -7,6 +7,11 @@
   background-repeat: no-repeat;
   background-size: 10px;
   background-position: center;
+  transition: opacity .3s linear;
+}
+
+.editButton:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 425px) {

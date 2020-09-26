@@ -7,6 +7,11 @@
   background-repeat: no-repeat;
   background-size: 22px;
   background-position: center;
+  transition: opacity .3s linear;
+}
+
+.addButton:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 740px) {
