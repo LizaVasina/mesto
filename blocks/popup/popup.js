@@ -1,33 +1,32 @@
+//кнопки
 let editButton = document.querySelector('.editButton');
-let saveButton = document.querySelector('.saveButton');
 let closeButton = document.querySelector('.closeButton');
-let popup = document.querySelector('.popup');
 
-/* Переменные имени профиля */
+// попап и форма в нем
+let popup = document.querySelector('.popup');
+let form = document.querySelector('.popup__form');
+
+// переменные имени профиля
 let name = document.querySelector('.profile__name');
 let inputName = document.querySelector('.popup__text_type_name');
 
-/* Переменные описания профиля */
+// перменные описания профиля
 let description = document.querySelector('.profile__description');
 let inputDescription = document.querySelector('.popup__text_type_description');
 
-/* Функция открытия попап окна */
+// функция открытия попап окна
 function openPopup() {
   popup.classList.add('popup_opened');
   inputName.value = name.textContent;
   inputDescription.value = description.textContent;
 }
 
-/* Функция закрытия попап окна */
+// функция закрытия попап окна
 function closePopup() {
   popup.classList.remove('popup_opened');
 }
 
-console.log(name);
-console.log(inputName);
-console.log(description);
-console.log(inputDescription);
-
+// обработчик формы
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
@@ -37,5 +36,5 @@ function formSubmitHandler (evt) {
 }
 
 editButton.addEventListener('click', openPopup);
-saveButton.addEventListener('click', formSubmitHandler);
+form.addEventListener('submit', formSubmitHandler);
 closeButton.addEventListener('click', closePopup);
