@@ -18,6 +18,6 @@ HTML5, CSS3, именование классов и файловая струк�
 * [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
 
 **Ссылка на сайт**
-[Сайт тут!] (https://lizavasina.github.io/mesto/)
+[Сайт тут!](https://lizavasina.github.io/mesto/)
 
 🌿
