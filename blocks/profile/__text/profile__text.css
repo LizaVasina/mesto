@@ -1,5 +1,6 @@
 .profile__text {
   margin-right: 17px;
+  max-width: 350px;
 }
 
 @media screen and (max-width: 740px) {
