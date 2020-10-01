@@ -1,0 +1,27 @@
+.addButton {
+  border: 1px solid #fff;
+  background-color: #000;
+  width: 150px;
+  height: 50px;
+  background-image: url(../../images/add-icon.png);
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position: center;
+  transition: opacity .3s linear;
+}
+
+.addButton:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 740px) {
+  .addButton {
+    width: 282px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .addButton {
+    background-size: 16px;
+  }
+}
