@@ -2,4 +2,8 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 29px;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
