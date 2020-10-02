@@ -1,12 +1,12 @@
 .header {
-    position: relative;
+  position: relative;
 }
 
 .header::before {
-    content: '';
-    border-bottom: 2px solid white;
-    opacity: .7;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
+  content: '';
+  border-bottom: 2px solid white;
+  opacity: .7;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
