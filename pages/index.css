@@ -21,10 +21,10 @@
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__description/profile__description.css);
 
-@import url(../blocks/editButton/editButton.css);
-@import url(../blocks/addButton/addButton.css);
-@import url(../blocks/saveButton/saveButton.css);
-@import url(../blocks/closeButton/closeButton.css);
+@import url(../blocks/edit-button/edit-button.css);
+@import url(../blocks/add-button/add-button.css);
+@import url(../blocks/save-button/save-button.css);
+@import url(../blocks/close-button/close-button.css);
 @import url(../blocks/content/content.css);
 
 @import url(../blocks/photo-grid/photo-grid.css);
