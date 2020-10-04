@@ -1,15 +1,10 @@
 .header {
   position: relative;
   width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
-.header::before {
-  content: '';
-  border-bottom: 2px solid white;
-  opacity: .7;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
+
 
 
