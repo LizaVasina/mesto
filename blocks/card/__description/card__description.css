@@ -3,10 +3,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 21px;
-  padding-right: 15px;
+  padding: 25px 15px 30px 21px;
   margin: 0;
   width: 100%;
   box-sizing: border-box;
-  min-height: 79px;
 }
