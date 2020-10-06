@@ -1,5 +1,5 @@
 //кнопки
-let editButton = document.querySelector('.edit-button');
+let editButton = document.querySelector('.profile__edit-button');
 let closeButton = document.querySelector('.popup__close-button');
 
 // попап и форма в нем
