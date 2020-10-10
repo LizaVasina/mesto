@@ -82,14 +82,26 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_type_info">
       <div class="popup__container">
-        <button type="button" class="popup__close-button"></button>
+        <button type="button" class="popup__close-button popup__close-button_place_info"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="Popup-form" method="post">
+        <form class="popup__form popup__form_type_info" name="Popup-form-info" method="post">
           <input type="text" placeholder="Имя" name="Name" class="popup__text popup__text_type_name">
           <input type="text" placeholder="О себе" name="Description" class="popup__text popup__text_type_description">
-          <button type="submit" class="popup__save-button">Сохранить</button>
+          <button type="submit" class="popup__button popup__button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_photos">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button popup__close-button_place_photos"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup__form_type_photos" name="Popup-form-photos" method="post">
+          <input type="text" placeholder="Имя" name="Name" class="popup__text popup__text_type_pic-name">
+          <input type="text" placeholder="Ссылка на картинку" name="Link" class="popup__text popup__text_type_link">
+          <button type="submit" class="popup__button popup__button_type_create">Создать</button>
         </form>
       </div>
     </div>
