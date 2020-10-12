@@ -1,5 +1,8 @@
 .card__picture {
   width: 100%;
   margin: 0;
-  object-fit: contain;
+  object-fit: cover;
+  width: 288px;
+  height: 288px;
+  border-radius: 10px 10px 0 0;
 }
