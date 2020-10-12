@@ -29,6 +29,7 @@
 @import url(../blocks/photo-grid/photo-grid.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__picture/card__picture.css);
+@import url(../blocks/card/__delete-button/card__delete-button.css);
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__like/card__like.css);
