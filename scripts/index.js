@@ -92,7 +92,6 @@ function formInfoSubmitHandler (evt) {
 // обработчик формы добавления карточки
 function formPhotosSubmitHandler (evt) {
   evt.preventDefault();
-  console.log('пипяо');
 
   let inputPicName = document.querySelector('.popup__text_type_pic-name');
   let inputLink = document.querySelector('.popup__text_type_link');
