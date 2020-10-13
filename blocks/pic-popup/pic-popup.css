@@ -1,0 +1,9 @@
+.pic-popup {
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 425px) {
+  .pic-popup {
+    padding-top: 100px;
+  }
+}
