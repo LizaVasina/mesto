@@ -1,6 +1,7 @@
 .pic-popup__caption {
-  margin-top: 10px;
-  margin-left: 0;
+  margin: 0;
+  max-width: 75vw;
+  width: fit-content;
   font-size: 12px;
   line-height: 15px;
   color: #fff;

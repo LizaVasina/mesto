@@ -1,8 +1,13 @@
 .popup__container_place_picture {
   background: none;
   max-width: 75vw;
-  max-height: 75vh;;
-  margin-top: 40px;
+  width: fit-content;
+  max-height: 75vh;
+  margin: 40px auto 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: max-content 15px;
+  gap: 10px;
 }
 
