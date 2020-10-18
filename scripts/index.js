@@ -75,25 +75,25 @@ function openPicPopup(picture, caption) {
 }
 
 //кнопки
-let editButton = document.querySelector('.profile__edit-button');
-let addButton = document.querySelector('.profile__add-button');
-let infoCloseButton = document.querySelector('.popup__close-button_place_info');
-let photosCloseButton = document.querySelector('.popup__close-button_place_photos');
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const infoCloseButton = document.querySelector('.popup__close-button_place_info');
+const photosCloseButton = document.querySelector('.popup__close-button_place_photos');
 
 // попап и форма в нем
-let popupInfo = document.querySelector('.popup_type_info');
-let popupPhotos = document.querySelector('.popup_type_photos');
-let formInfo = document.querySelector('.popup__form_type_info');
-let formPhotos = document.querySelector('.popup__form_type_photos');
-let popupPicture = document.querySelector('.pic-popup');
+const popupInfo = document.querySelector('.popup_type_info');
+const popupPhotos = document.querySelector('.popup_type_photos');
+const formInfo = document.querySelector('.popup__form_type_info');
+const formPhotos = document.querySelector('.popup__form_type_photos');
+const popupPicture = document.querySelector('.pic-popup');
 
 // переменные имени профиля
-let name = document.querySelector('.profile__name');
-let inputName = document.querySelector('.popup__text_type_name');
+const name = document.querySelector('.profile__name');
+const inputName = document.querySelector('.popup__text_type_name');
 
 // перменные описания профиля
-let description = document.querySelector('.profile__description');
-let inputDescription = document.querySelector('.popup__text_type_description');
+const description = document.querySelector('.profile__description');
+const inputDescription = document.querySelector('.popup__text_type_description');
 
 
 // функция открытия попап окна
@@ -127,7 +127,6 @@ function removeCard(evt) {
 // обработчик формы добавления карточки
 function formPhotosSubmitHandler (evt) {
   evt.preventDefault();
-  console.log('пипяо');
 
   let inputPicName = document.querySelector('.popup__text_type_pic-name');
   let inputLink = document.querySelector('.popup__text_type_link');
