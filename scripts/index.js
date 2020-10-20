@@ -32,8 +32,8 @@ const initialCards = [
 // шаблон карточки
 const cardTemplate = document.querySelector('#card-template');
 
-  let inputPicName = document.querySelector('.popup__text_type_pic-name');
-  let inputLink = document.querySelector('.popup__text_type_link');
+  const inputPicName = document.querySelector('.popup__text_type_pic-name');
+  const inputLink = document.querySelector('.popup__text_type_link');
 
 //кнопки
 const editButton = document.querySelector('.profile__edit-button');
@@ -48,13 +48,17 @@ const formInfo = document.querySelector('.popup__form_type_info');
 const formPhotos = document.querySelector('.popup__form_type_photos');
 const popupPicture = document.querySelector('.pic-popup');
 
+const profile = document.querySelector('.profile');
 // переменные имени профиля
-const name = document.querySelector('.profile__name');
-const inputName = document.querySelector('.popup__text_type_name');
+const name = profile.querySelector('.profile__name');
+const inputName = popupInfo.querySelector('.popup__text_type_name');
 
 // перменные описания профиля
-const description = document.querySelector('.profile__description');
-const inputDescription = document.querySelector('.popup__text_type_description');
+const description = profile.querySelector('.profile__description');
+const inputDescription = popupInfo.querySelector('.popup__text_type_description');
+
+const picPopupPicture = popupPicture.querySelector('.pic-popup__image');
+const picPopupCaption = popupPicture.querySelector('.pic-popup__caption');
 
 
 function openPopup(popupName) {
@@ -116,9 +120,6 @@ const handleCardFormSubmit = (evt) => {
 // функция открытия попапа картинки
 function openPicPopup(picture, caption) {
   popupPicture.classList.add('popup_opened');
-
-  const picPopupPicture = document.querySelector('.pic-popup__image');
-  const picPopupCaption = document.querySelector('.pic-popup__caption');
 
   picPopupPicture.src = picture;
   picPopupCaption.textContent = caption;
