@@ -66,7 +66,6 @@ const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_pla
 
 function togglePopup(popupName) {
   popupName.classList.toggle('popup_opened');
-  console.log('вызван тогл');
 }
 
 // функция открытия попап окна данных о профиле
@@ -130,7 +129,6 @@ function openPicPopup(picture, caption) {
 initialCards.forEach((data) => {
   const cardItem = createCard(data);
   gridContainer.append(cardItem);
-  console.log(cardItem);
 })
 
 // обработчик формы информации о профиле
