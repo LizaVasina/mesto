@@ -39,6 +39,7 @@ const addButton = document.querySelector('.profile__add-button');
 const infoCloseButton = document.querySelector('.popup__close-button_place_info');
 const photosCloseButton = document.querySelector('.popup__close-button_place_photos');
 
+const popup = document.querySelector('.popup');
 // попапы профиля и добавления фото и формы в них
 const popupInfo = document.querySelector('.popup_type_info');
 const popupPhotos = document.querySelector('.popup_type_photos');
@@ -67,6 +68,8 @@ const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_pla
 function togglePopup(popupName) {
   popupName.classList.toggle('popup_opened');
 }
+
+
 
 // функция открытия попап окна данных о профиле
 function openPopupInfo() {
@@ -153,4 +156,20 @@ infoCloseButton.addEventListener('click', () => togglePopup(popupInfo));
 photosCloseButton.addEventListener('click', () => togglePopup(popupPhotos));
 addButton.addEventListener('click', () => togglePopup(popupPhotos));
 formPhotos.addEventListener('submit', handleCardFormSubmit);
+
+
+popup.addEventListener('keydown', (evt) => {
+  if (popup.classList.contains('popup_opened')) {
+    if (evt.key === "Escape") togglePopup(popup);
+  }
+})
+
+// function closePopupEscape(evt) {
+//   const openedPopup = document.querySelector('.popup');
+//   if (openedPopup.classList.contains('popup_opened') && evt.key === "Escape") {
+//     toggle(openedPopup);
+//   }
+// }
+
+
 
