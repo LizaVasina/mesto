@@ -40,6 +40,7 @@ const infoCloseButton = document.querySelector('.popup__close-button_place_info'
 const photosCloseButton = document.querySelector('.popup__close-button_place_photos');
 
 const popup = document.querySelector('.popup');
+const popupContainer = popup.querySelector('.popup__container');
 // попапы профиля и добавления фото и формы в них
 const popupInfo = document.querySelector('.popup_type_info');
 const popupPhotos = document.querySelector('.popup_type_photos');
@@ -67,6 +68,25 @@ const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_pla
 
 function togglePopup(popupName) {
   popupName.classList.toggle('popup_opened');
+
+  if (popupName.classList.contains('popup_opened')) {
+
+    popupName.addEventListener('click', (evt) => {
+      console.log('пивет');
+      let container = popupName.querySelector('.popup__container');
+      console.log(container);
+      if (evt.target != container) {
+        togglePopup(popupName);
+      }
+    });
+  }
+}
+
+function helloFunc(etv, popupName) {
+  console.log('пивет');
+  if (evt.target === popupContainer) {
+    togglePopup(popupName);
+  }
 }
 
 
@@ -158,11 +178,31 @@ addButton.addEventListener('click', () => togglePopup(popupPhotos));
 formPhotos.addEventListener('submit', handleCardFormSubmit);
 
 
-popup.addEventListener('keydown', (evt) => {
-  if (popup.classList.contains('popup_opened')) {
-    if (evt.key === "Escape") togglePopup(popup);
-  }
-})
+// popup.addEventListener('keydown', (evt) => {
+//   escapeClose(popup, evt);
+// });
+
+// function escapeClose(popup, evt) {
+//   if (popup.classList.contains('popup_opened')) {
+//     console.log('hi');
+//     if (evt.key === "Escape") {
+//       togglePopup(popup);
+//       console.log('close');
+//     }
+//   }
+// }
+
+// popup.addEventListener('click', (evt) => {
+//   console.log('вызов виндоу колбэка');
+//   // if (evt.target != container) {
+//   //     popup.classList.remove('.popup_opened');
+//   //   }
+// })
+
+
+
+// снимать класс нужно с popup
+// а кликать вне формы
 
 // function closePopupEscape(evt) {
 //   const openedPopup = document.querySelector('.popup');
