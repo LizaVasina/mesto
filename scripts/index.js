@@ -39,8 +39,7 @@ const addButton = document.querySelector('.profile__add-button');
 const infoCloseButton = document.querySelector('.popup__close-button_place_info');
 const photosCloseButton = document.querySelector('.popup__close-button_place_photos');
 
-const popup = document.querySelector('.popup');
-const popupContainer = popup.querySelector('.popup__container');
+// const popup = document.querySelector('.popup');
 // попапы профиля и добавления фото и формы в них
 const popupInfo = document.querySelector('.popup_type_info');
 const popupPhotos = document.querySelector('.popup_type_photos');
@@ -68,28 +67,7 @@ const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_pla
 
 function togglePopup(popupName) {
   popupName.classList.toggle('popup_opened');
-
-  if (popupName.classList.contains('popup_opened')) {
-
-    popupName.addEventListener('click', (evt) => {
-      console.log('пивет');
-      let container = popupName.querySelector('.popup__container');
-      console.log(container);
-      if (evt.target != container) {
-        togglePopup(popupName);
-      }
-    });
-  }
 }
-
-function helloFunc(etv, popupName) {
-  console.log('пивет');
-  if (evt.target === popupContainer) {
-    togglePopup(popupName);
-  }
-}
-
-
 
 // функция открытия попап окна данных о профиле
 function openPopupInfo() {
@@ -177,6 +155,16 @@ photosCloseButton.addEventListener('click', () => togglePopup(popupPhotos));
 addButton.addEventListener('click', () => togglePopup(popupPhotos));
 formPhotos.addEventListener('submit', handleCardFormSubmit);
 
+
+const onClickPopupBackgroundListener = (popupName) => (evt) => {
+  if (evt.target === evt.currentTarget) {
+    togglePopup(popupName);
+  }
+}
+
+popupInfo.addEventListener('click', onClickPopupBackgroundListener(popupInfo));
+popupPhotos.addEventListener('click', onClickPopupBackgroundListener(popupPhotos));
+popupPicture.addEventListener('click', onClickPopupBackgroundListener(popupPicture));
 
 // popup.addEventListener('keydown', (evt) => {
 //   escapeClose(popup, evt);
