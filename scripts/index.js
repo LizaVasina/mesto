@@ -69,17 +69,17 @@ const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_pla
 function togglePopup(popupName) {
   popupName.classList.toggle('popup_opened');
 
-  if (popupName.classList.contains('popup_opened')) {
+  // if (popupName.classList.contains('popup_opened')) {
 
-    popupName.addEventListener('click', (evt) => {
-      console.log('пивет');
-      let container = popupName.querySelector('.popup__container');
-      console.log(container);
-      if (evt.target != container) {
-        togglePopup(popupName);
-      }
-    });
-  }
+  //   popupName.addEventListener('click', (evt) => {
+  //     console.log('пивет');
+  //     let container = popupName.querySelector('.popup__container');
+  //     console.log(container);
+  //     if (evt.target != container) {
+  //       togglePopup(popupName);
+  //     }
+  //   });
+  // }
 }
 
 function helloFunc(etv, popupName) {
