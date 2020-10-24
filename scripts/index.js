@@ -178,38 +178,5 @@ addButton.addEventListener('click', () => togglePopup(popupPhotos));
 formPhotos.addEventListener('submit', handleCardFormSubmit);
 
 
-// popup.addEventListener('keydown', (evt) => {
-//   escapeClose(popup, evt);
-// });
-
-// function escapeClose(popup, evt) {
-//   if (popup.classList.contains('popup_opened')) {
-//     console.log('hi');
-//     if (evt.key === "Escape") {
-//       togglePopup(popup);
-//       console.log('close');
-//     }
-//   }
-// }
-
-// popup.addEventListener('click', (evt) => {
-//   console.log('вызов виндоу колбэка');
-//   // if (evt.target != container) {
-//   //     popup.classList.remove('.popup_opened');
-//   //   }
-// })
-
-
-
-// снимать класс нужно с popup
-// а кликать вне формы
-
-// function closePopupEscape(evt) {
-//   const openedPopup = document.querySelector('.popup');
-//   if (openedPopup.classList.contains('popup_opened') && evt.key === "Escape") {
-//     toggle(openedPopup);
-//   }
-// }
-
 
 

@@ -1,16 +1,15 @@
-console.log('всем пис');
 
 // показываем сообщение об ошибке
 function showError(input) {
   const error = document.querySelector(`#${input.id}-error`);
-  input.classList.add('popup__input_state_invalid');
+  input.classList.add('popup__text_state_invalid');
   error.textContent = input.validationMessage;
 }
 
 // скрываем сообщение об ошибке
 function hideError(input) {
   const error = document.querySelector(`#${input.id}-error`);
-  input.classList.remove('popup__input_state_invalid');
+  input.classList.remove('popup__text_state_invalid');
   error.textContent = '';
 }
 
@@ -64,6 +63,13 @@ function enableValidation({formSelector, buttonSelector}) {
 }
 
 enableValidation({
-  formSelector: 'popup__form',
-  buttonElement: 'popup__button'
+  formSelector: '.popup__form',
+  buttonSelector: '.popup__button'
 });
+
+// изначально делаем кнопку сохранить в попапе редактирования профиля активной
+// поскольку в попап сразу заносятся корректные данные из разметки
+const saveButton = document.querySelector('.popup__button_type_save');
+saveButton.disabled = false;
+saveButton.classList.remove('popup__button_invalid');
+
