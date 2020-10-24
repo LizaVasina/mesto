@@ -166,38 +166,14 @@ popupInfo.addEventListener('click', onClickPopupBackgroundListener(popupInfo));
 popupPhotos.addEventListener('click', onClickPopupBackgroundListener(popupPhotos));
 popupPicture.addEventListener('click', onClickPopupBackgroundListener(popupPicture));
 
-// popup.addEventListener('keydown', (evt) => {
-//   escapeClose(popup, evt);
-// });
+const onEscapeClickPopupListener = (popupName) => (evt) => {
+  if (evt.key === 'Escape') {
+    togglePopup(popupName);
+  }
+}
 
-// function escapeClose(popup, evt) {
-//   if (popup.classList.contains('popup_opened')) {
-//     console.log('hi');
-//     if (evt.key === "Escape") {
-//       togglePopup(popup);
-//       console.log('close');
-//     }
-//   }
-// }
-
-// popup.addEventListener('click', (evt) => {
-//   console.log('вызов виндоу колбэка');
-//   // if (evt.target != container) {
-//   //     popup.classList.remove('.popup_opened');
-//   //   }
-// })
-
-
-
-// снимать класс нужно с popup
-// а кликать вне формы
-
-// function closePopupEscape(evt) {
-//   const openedPopup = document.querySelector('.popup');
-//   if (openedPopup.classList.contains('popup_opened') && evt.key === "Escape") {
-//     toggle(openedPopup);
-//   }
-// }
-
+popupInfo.addEventListener('keydown', onEscapeClickPopupListener(popupInfo));
+popupPhotos.addEventListener('keydown', onEscapeClickPopupListener(popupPhotos));
+popupPicture.addEventListener('keydown', onEscapeClickPopupListener(popupPicture));
 
 
