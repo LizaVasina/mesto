@@ -39,7 +39,6 @@ const addButton = document.querySelector('.profile__add-button');
 const infoCloseButton = document.querySelector('.popup__close-button_place_info');
 const photosCloseButton = document.querySelector('.popup__close-button_place_photos');
 
-// const popup = document.querySelector('.popup');
 // попапы профиля и добавления фото и формы в них
 const popupInfo = document.querySelector('.popup_type_info');
 const popupPhotos = document.querySelector('.popup_type_photos');
