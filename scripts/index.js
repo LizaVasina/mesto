@@ -67,7 +67,18 @@ const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_pla
 
 function togglePopup(popupName) {
   popupName.classList.toggle('popup_opened');
+
+  // закрытие по escape
+  if (popupName.classList.contains('popup_opened')) {
+    window.addEventListener('keydown', (evt) => {
+      if (evt.key === "Escape") {
+        popupName.classList.remove('popup_opened');
+      }
+    });
+  }
 }
+
+
 
 // функция открытия попап окна данных о профиле
 function openPopupInfo() {
@@ -156,6 +167,7 @@ addButton.addEventListener('click', () => togglePopup(popupPhotos));
 formPhotos.addEventListener('submit', handleCardFormSubmit);
 
 
+// закрытие попапов по нажатию на оверлей
 const onClickPopupBackgroundListener = (popupName) => (evt) => {
   if (evt.target === evt.currentTarget) {
     togglePopup(popupName);
@@ -165,15 +177,3 @@ const onClickPopupBackgroundListener = (popupName) => (evt) => {
 popupInfo.addEventListener('click', onClickPopupBackgroundListener(popupInfo));
 popupPhotos.addEventListener('click', onClickPopupBackgroundListener(popupPhotos));
 popupPicture.addEventListener('click', onClickPopupBackgroundListener(popupPicture));
-
-const onEscapeClickPopupListener = (popupName) => (evt) => {
-  if (evt.key === 'Escape') {
-    togglePopup(popupName);
-  }
-}
-
-popupInfo.addEventListener('keydown', onEscapeClickPopupListener(popupInfo));
-popupPhotos.addEventListener('keydown', onEscapeClickPopupListener(popupPhotos));
-popupPicture.addEventListener('keydown', onEscapeClickPopupListener(popupPicture));
-
-
