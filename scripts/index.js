@@ -99,9 +99,7 @@ const createCard = (cardDetails) => {
 
   // лайк
   const likeElement = cardElement.querySelector('.card__like');
-  likeElement.addEventListener('click', function(evt) {
-    evt.target.classList.toggle('card__like_active');
-  });
+  likeElement.addEventListener('click', likeCard);
 
   // кнопка удалить
   const removeButton = cardElement.querySelector('.card__delete-button');
@@ -149,6 +147,11 @@ function formInfoSubmitHandler (evt) {
   name.textContent = inputName.value;
   description.textContent = inputDescription.value;
   togglePopup(popupInfo);
+}
+
+//лайк по карточке
+function likeCard(evt) {
+  evt.target.classList.toggle('card__like_active');
 }
 
 //удаление карточки
