@@ -64,21 +64,18 @@ const picPopupPicture = popupPicture.querySelector('.pic-popup__image');
 const picPopupCaption = popupPicture.querySelector('.pic-popup__caption');
 const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_place_picture');
 
-function togglePopup(popupName) {
-  popupName.classList.toggle('popup_opened');
-
-  // закрытие по escape
-  if (popupName.classList.contains('popup_opened')) {
-    window.addEventListener('keydown', (evt) => {
-      if (evt.key === "Escape") {
-        popupName.classList.remove('popup_opened');
-      }
-    });
+// закрытие попапа при нажатии на escape
+const onEscapeClosePopup =  (evt) => {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+    window.removeEventListener('keydown', onEscapeClosePopup);
   }
 }
 
 function openPopup(popupName) {
   popupName.classList.add('popup_opened');
+  window.addEventListener('keydown', onEscapeClosePopup);
 }
 
 function closePopup(popupName) {
@@ -87,7 +84,7 @@ function closePopup(popupName) {
 
 // функция открытия попап окна данных о профиле
 function openPopupInfo() {
-  togglePopup(popupInfo);
+  openPopup(popupInfo);
   inputName.value = name.textContent;
   inputDescription.value = description.textContent;
 }
