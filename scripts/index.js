@@ -77,7 +77,13 @@ function togglePopup(popupName) {
   }
 }
 
+function openPopup(popupName) {
+  popupName.classList.add('popup_opened');
+}
 
+function closePopup(popupName) {
+  popupName.classList.remove('popup_opened');
+}
 
 // функция открытия попап окна данных о профиле
 function openPopupInfo() {
@@ -123,7 +129,7 @@ const handleCardFormSubmit = (evt) => {
   });
 
   gridContainer.prepend(cardItem);
-  togglePopup(popupPhotos);
+  closePopup(popupPhotos);
   formPhotos.reset();
 }
 
@@ -133,7 +139,7 @@ function openPicPopup(picture, caption) {
   picPopupPicture.alt = caption;
   picPopupCaption.textContent = caption;
 
-  togglePopup(popupPicture);
+  openPopup(popupPicture);
 }
 
 // автоматическое добавление карточек
@@ -148,7 +154,7 @@ function formInfoSubmitHandler (evt) {
 
   name.textContent = inputName.value;
   description.textContent = inputDescription.value;
-  togglePopup(popupInfo);
+  closePopup(popupInfo);
 }
 
 //лайк по карточке
@@ -162,19 +168,19 @@ function removeCard(evt) {
 }
 
 // обработчики
-picPopupCloseButton.addEventListener('click', () => togglePopup(popupPicture));
+picPopupCloseButton.addEventListener('click', () => closePopup(popupPicture));
 editButton.addEventListener('click', openPopupInfo);
 formInfo.addEventListener('submit', formInfoSubmitHandler);
-infoCloseButton.addEventListener('click', () => togglePopup(popupInfo));
-photosCloseButton.addEventListener('click', () => togglePopup(popupPhotos));
-addButton.addEventListener('click', () => togglePopup(popupPhotos));
+infoCloseButton.addEventListener('click', () => closePopup(popupInfo));
+photosCloseButton.addEventListener('click', () => closePopup(popupPhotos));
+addButton.addEventListener('click', () => openPopup(popupPhotos));
 formPhotos.addEventListener('submit', handleCardFormSubmit);
 
 
 // закрытие попапов по нажатию на оверлей
 const onClickPopupBackgroundListener = (popupName) => (evt) => {
   if (evt.target === evt.currentTarget) {
-    togglePopup(popupName);
+    closePopup(popupName);
   }
 }
 
