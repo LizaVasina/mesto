@@ -96,6 +96,7 @@ const createCard = (cardDetails) => {
 
   caption.textContent = cardDetails.name;
   picture.src = cardDetails.link;
+  picture.alt = cardDetails.name;
 
   // лайк
   const likeElement = cardElement.querySelector('.card__like');
@@ -129,6 +130,7 @@ const handleCardFormSubmit = (evt) => {
 // функция открытия попапа картинки
 function openPicPopup(picture, caption) {
   picPopupPicture.src = picture;
+  picPopupPicture.alt = caption;
   picPopupCaption.textContent = caption;
 
   togglePopup(popupPicture);
