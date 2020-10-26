@@ -69,7 +69,6 @@ const onEscapeClosePopup =  (evt) => {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-    window.removeEventListener('keydown', onEscapeClosePopup);
   }
 }
 
@@ -80,6 +79,7 @@ function openPopup(popupName) {
 
 function closePopup(popupName) {
   popupName.classList.remove('popup_opened');
+  window.removeEventListener('keydown', onEscapeClosePopup);
 }
 
 // функция открытия попап окна данных о профиле
