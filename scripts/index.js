@@ -1,36 +1,10 @@
 import { Card } from './Card.js';
+import { FormValidation } from './FormValidation.js';
+import { initialCards } from './initialCards.js';
 
 
 // фото галерея
 const gridContainer = document.querySelector('.photo-grid');
-
-// массив карточек
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // шаблон карточки
 const cardTemplate = document.querySelector('#card-template');
@@ -65,6 +39,20 @@ const popupPicture = document.querySelector('.pic-popup');
 const picPopupPicture = popupPicture.querySelector('.pic-popup__image');
 const picPopupCaption = popupPicture.querySelector('.pic-popup__caption');
 const picPopupCloseButton = popupPicture.querySelector('.popup__close-button_place_picture');
+
+const formConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text',
+  buttonSelector: '.popup__button',
+  inactiveButtonState: 'popup__button_invalid',
+  inputErrorClass: 'popup__text_state_invalid',
+}
+
+const infoFormValidation = new FormValidation(formConfig, formInfo);
+infoFormValidation.enableValidation();
+
+const photosFormValidation = new FormValidation(formConfig, formPhotos);
+photosFormValidation.enableValidation();
 
 // закрытие попапа при нажатии на escape
 const onEscapeClosePopup =  (evt) => {
@@ -132,7 +120,10 @@ editButton.addEventListener('click', openPopupInfo);
 formInfo.addEventListener('submit', formInfoSubmitHandler);
 infoCloseButton.addEventListener('click', () => closePopup(popupInfo));
 photosCloseButton.addEventListener('click', () => closePopup(popupPhotos));
-addButton.addEventListener('click', () => openPopup(popupPhotos));
+addButton.addEventListener('click', () => {
+    openPopup(popupPhotos);
+    photosFormValidation.enableValidation();
+});
 formPhotos.addEventListener('submit', handleCardFormSubmit);
 
 
@@ -146,3 +137,5 @@ const onClickPopupBackgroundListener = (popupName) => (evt) => {
 popupInfo.addEventListener('click', onClickPopupBackgroundListener(popupInfo));
 popupPhotos.addEventListener('click', onClickPopupBackgroundListener(popupPhotos));
 popupPicture.addEventListener('click', onClickPopupBackgroundListener(popupPicture));
+
+
