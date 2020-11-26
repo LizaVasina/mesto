@@ -1,6 +1,7 @@
-import { Card } from './Card.js';
-import { FormValidation } from './FormValidation.js';
-import { initialCards } from './initialCards.js';
+import { Card } from './components/Card.js';
+import { FormValidation } from './components/FormValidation.js';
+import { initialCards } from './utils/constants.js';
+import { Section } from './components/Section.js';
 
 
 // фото галерея
@@ -77,14 +78,30 @@ function openPopupInfo() {
   openPopup(popupInfo);
   inputName.value = name.textContent;
   inputDescription.value = description.textContent;
+  infoFormValidation.enableValidation();
 }
 
 // добавление карточки из попап окна
+// const handleCardFormSubmit = (evt) => {
+//   evt.preventDefault();
+
+//   const cardItem = new Card (inputPicName.value, inputLink.value, cardTemplate);
+//   gridContainer.prepend(cardItem.render());
+
+//   closePopup(popupPhotos);
+//   formPhotos.reset();
+// }
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
 
   const cardItem = new Card (inputPicName.value, inputLink.value, cardTemplate);
-  gridContainer.prepend(cardItem.render());
+  const newCardAdding = new Section({
+    items: [cardItem],
+    renderer: () => {
+      newCardAdding.addItem(cardItem.render());
+    }
+  }, gridContainer);
+  newCardAdding.render();
 
   closePopup(popupPhotos);
   formPhotos.reset();
@@ -100,10 +117,19 @@ export function openPicPopup(picture, caption) {
 }
 
 // автоматическое добавление карточек
-initialCards.forEach((data) => {
-  const cardItem = new Card (data.name, data.link, cardTemplate);
-  gridContainer.append(cardItem.render());
-})
+const defaultCardList = new Section({
+  items: initialCards,
+  renderer: (cardElement) => {
+    const card = new Card (cardElement.name, cardElement.link, cardTemplate);
+    defaultCardList._container.append(card.render());
+  }
+}, gridContainer);
+defaultCardList.render();
+
+// initialCards.forEach((data) => {
+//   const cardItem = new Card (data.name, data.link, cardTemplate);
+//   gridContainer.append(cardItem.render());
+// })
 
 // обработчик формы информации о профиле
 function formInfoSubmitHandler (evt) {
