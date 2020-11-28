@@ -1,10 +1,9 @@
-import {openPicPopup} from '../index.js';
-
 export class Card {
-  constructor(name, link, templateSelector) {
+  constructor({name, link, templateSelector, handleCardClick}) {
     this._name = name;
     this._link = link;
     this._template = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _delete = (evt) => {
@@ -31,10 +30,7 @@ export class Card {
       addEventListener('click', this._like);
 
     this._content.querySelector('.card__popup-button').
-      addEventListener('click', () => openPicPopup(
-        this._link,
-        this._name
-      ));
+      addEventListener('click', () => this._handleCardClick());
 
     return this._content;
   }
