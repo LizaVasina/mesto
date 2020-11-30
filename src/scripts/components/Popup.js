@@ -18,13 +18,13 @@ export class Popup {
     this._closeButton.removeEventListener('click', this.close);
   }
 
-  _handleEscClose = (evt) => {
+  _handleEscClose (evt) {
     if (evt.key === "Escape") {
       this.close();
     }
   }
 
-  _handleOverlayClose = (evt) => {
+  _handleOverlayClose (evt) {
     if(evt.target === evt.currentTarget) {
       this.close();
     }

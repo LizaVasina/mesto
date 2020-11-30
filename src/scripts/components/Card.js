@@ -6,11 +6,11 @@ export class Card {
     this._handleCardClick = handleCardClick;
   }
 
-  _delete = (evt) => {
+  _delete (evt) {
     evt.target.closest('.card').remove();
   }
 
-  _like = (evt) => {
+  _like (evt) {
     evt.target.classList.toggle('card__like_active');
   }
 

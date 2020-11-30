@@ -1,9 +1,11 @@
-import { Card } from './components/Card.js';
-import { FormValidation } from './components/FormValidation.js';
-import { Section } from './components/Section.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
-import { PopupWithForm } from './components/PopupWithForm.js';
-import { UserInfo } from './components/UserInfo.js';
+import './index.css';
+
+import { Card } from '../scripts/components/Card.js';
+import { FormValidation } from '../scripts/components/FormValidation.js';
+import { Section } from '../scripts/components/Section.js';
+import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
+import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
+import { UserInfo } from '../scripts/components/UserInfo.js';
 
 import { initialCards,
         formConfig,
@@ -14,7 +16,7 @@ import { initialCards,
         editButton,
         addButton,
         inputPicName,
-        inputLink } from './utils/constants.js';
+        inputLink } from '../scripts/utils/constants.js';
 
 
 
