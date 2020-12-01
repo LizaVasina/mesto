@@ -12,4 +12,5 @@
 
 .card__like:hover {
   opacity: .6;
+  cursor: pointer;
 }

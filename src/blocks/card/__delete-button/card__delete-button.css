@@ -15,4 +15,5 @@
 
 .card__delete-button:hover {
   opacity: .6;
+  cursor: pointer;
 }
