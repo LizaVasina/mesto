@@ -98,8 +98,8 @@ editButton.addEventListener('click', () => {
   const profileData = userInfo.getUserInfo();
   const formName = popupInfoClass._form.querySelector('.popup__text_type_name');
   const formDescription = popupInfoClass._form.querySelector('.popup__text_type_description');
-  formName.value = profileData.Name;
-  formDescription.value = profileData.Description;
+  formName.value = profileData.name;
+  formDescription.value = profileData.description;
   infoFormValidation.enableValidation();
   });
 
