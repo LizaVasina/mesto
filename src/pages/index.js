@@ -27,20 +27,25 @@ infoFormValidation.enableValidation();
 const photosFormValidation = new FormValidation(formConfig, formPhotos);
 photosFormValidation.enableValidation();
 
+//функция создания карточки
+function createCard(name, link, templateSelector, handleCardClick) {
+  return new Card ({
+    name: name,
+    link: link,
+    templateSelector: templateSelector,
+    handleCardClick: handleCardClick
+  });
+};
 
+const popupWithImage = new PopupWithImage('.pic-popup');
+popupWithImage.setEventListeners();
 // добавление карточек из попапа
 const popupPhotoForm = new PopupWithForm({
   popupSelector: '.popup_type_photos',
   handleFormSubmit: () => {
-    const cardItem = new Card ({
-      name: inputPicName.value,
-      link: inputLink.value,
-      templateSelector: cardTemplate,
-      handleCardClick: () => {
-        const popupWithImage = new PopupWithImage('.pic-popup');
-        popupWithImage.setEventListeners();
-        popupWithImage.open(cardItem._name, cardItem._link);
-      }
+    const cardItem = createCard(inputPicName.value, inputLink.value, cardTemplate,
+    () => {
+      popupWithImage.open(cardItem._name, cardItem._link);
     });
     const newCardAdding = new Section({
       items: [cardItem],
@@ -56,19 +61,13 @@ const popupPhotoForm = new PopupWithForm({
 });
 popupPhotoForm.setEventListeners();
 
-const popupWithImage = new PopupWithImage('.pic-popup');
-popupWithImage.setEventListeners();
 // автоматическое добавление карточек
 const defaultCardList = new Section({
   items: initialCards,
   renderer: (cardElement) => {
-    const card = new Card ({
-      name: cardElement.name,
-      link: cardElement.link,
-      templateSelector: cardTemplate,
-      handleCardClick: () => {
-        popupWithImage.open(card._name, card._link);
-      }
+    const card = createCard(cardElement.name, cardElement.link, cardTemplate,
+    () => {
+      popupWithImage.open(card._name, card._link);
     });
     defaultCardList._container.append(card.render());
   }

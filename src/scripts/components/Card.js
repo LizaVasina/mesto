@@ -14,8 +14,6 @@ export class Card {
     evt.target.classList.toggle('card__like_active');
   }
 
-
-
   render() {
     this._content = this._template.content.cloneNode(true);
     this._title = this._content.querySelector('.card__title');
