@@ -56,7 +56,8 @@ const popupPhotoForm = new PopupWithForm({
 });
 popupPhotoForm.setEventListeners();
 
-
+const popupWithImage = new PopupWithImage('.pic-popup');
+popupWithImage.setEventListeners();
 // автоматическое добавление карточек
 const defaultCardList = new Section({
   items: initialCards,
@@ -66,8 +67,6 @@ const defaultCardList = new Section({
       link: cardElement.link,
       templateSelector: cardTemplate,
       handleCardClick: () => {
-        const popupWithImage = new PopupWithImage('.pic-popup');
-        popupWithImage.setEventListeners();
         popupWithImage.open(card._name, card._link);
       }
     });
@@ -81,9 +80,8 @@ defaultCardList.render();
 const userInfo = new UserInfo('.profile__name', '.profile__description');
 const popupInfoClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
-  handleFormSubmit: () => {
-    popupInfoClass._getInputValues();
-    userInfo.setUserInfo(popupInfoClass._formValues.Name, popupInfoClass._formValues.Description);
+  handleFormSubmit: (values) => {
+    userInfo.setUserInfo(values.name, values.description);
     popupInfoClass.close();
   }
   });
