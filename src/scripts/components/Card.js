@@ -18,19 +18,21 @@ export class Card {
 
   render() {
     this._content = this._template.content.cloneNode(true);
+    this._title = this._content.querySelector('.card__title');
+    this._picture = this._content.querySelector('.card__picture');
+    this._deleteButton = this._content.querySelector('.card__delete-button');
+    this._likeButton = this._content.querySelector('.card__like');
+    this._popupButton = this._content.querySelector('.card__popup-button');
 
-    this._content.querySelector('.card__title').textContent = this._name;
-    this._content.querySelector('.card__picture').alt = this._name;
-    this._content.querySelector('.card__picture').src = this._link;
+    this._title.textContent = this._name;
+    this._picture.alt = this._name;
+    this._picture.src = this._link;
 
-    this._content.querySelector('.card__delete-button').
-      addEventListener('click', this._delete);
+    this._deleteButton.addEventListener('click', this._delete);
 
-    this._content.querySelector('.card__like').
-      addEventListener('click', this._like);
+    this._likeButton.addEventListener('click', this._like);
 
-    this._content.querySelector('.card__popup-button').
-      addEventListener('click', () => this._handleCardClick());
+    this._popupButton.addEventListener('click', () => this._handleCardClick());
 
     return this._content;
   }
