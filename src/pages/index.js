@@ -69,7 +69,7 @@ const defaultCardList = new Section({
     () => {
       popupWithImage.open(card._name, card._link);
     });
-    defaultCardList._container.append(card.render());
+    defaultCardList.addItem(card.render());
   }
 }, gridContainer);
 defaultCardList.render();
