@@ -29,4 +29,16 @@ export class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
   }
+
+  updateProfileData(newName, newAbout) {
+    return fetch(`${this._url}users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: newName,
+        about: newAbout
+      })
+    })
+  }
+
 }

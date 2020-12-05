@@ -122,6 +122,7 @@ const popupInfoClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
   handleFormSubmit: (values) => {
     userInfo.setUserInfo(values.name, values.description);
+    api.updateProfileData(values.name, values.description);
     popupInfoClass.close();
   }
   });
