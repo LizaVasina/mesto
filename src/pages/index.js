@@ -6,6 +6,7 @@ import { Section } from '../scripts/components/Section.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
+import { Api } from '../scripts/components/Api.js';
 
 import { initialCards,
         formConfig,
@@ -17,6 +18,46 @@ import { initialCards,
         addButton,
         inputPicName,
         inputLink } from '../scripts/utils/constants.js';
+
+const userInfo = new UserInfo('.profile__name', '.profile__description');
+const profileAvatar = document.querySelector('.profile__avatar');
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-18/',
+  headers: {
+    authorization: '692b85e5-e2ab-47c0-9643-687f3c4965d9',
+    'Content-type': 'application/json',
+  }
+});
+
+// получение информации о профиле с сервера
+api.getProfileData()
+  .then(data => {
+  userInfo.setUserInfo(data.name, data.about);
+  profileAvatar.src = data.avatar;
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+// получение карточек с сервера
+api.getInitialCards()
+  .then(data => {
+      const defaultCardList = new Section({
+        items: data,
+        renderer: (cardElement) => {
+          const card = createCard(cardElement.name, cardElement.link, cardTemplate,
+          () => {
+            popupWithImage.open(card._name, card._link);
+          });
+          defaultCardList.addItem(card.render());
+        }
+      }, gridContainer);
+      defaultCardList.render();
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 
 
@@ -62,21 +103,21 @@ const popupPhotoForm = new PopupWithForm({
 popupPhotoForm.setEventListeners();
 
 // автоматическое добавление карточек
-const defaultCardList = new Section({
+const oldDefaultCardList = new Section({
   items: initialCards,
   renderer: (cardElement) => {
     const card = createCard(cardElement.name, cardElement.link, cardTemplate,
     () => {
       popupWithImage.open(card._name, card._link);
     });
-    defaultCardList.addItem(card.render());
+    oldDefaultCardList.addItem(card.render());
   }
 }, gridContainer);
-defaultCardList.render();
+oldDefaultCardList.render();
 
 
 // работа с данными профиля
-const userInfo = new UserInfo('.profile__name', '.profile__description');
+
 const popupInfoClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
   handleFormSubmit: (values) => {
