@@ -17,10 +17,6 @@ export class Card {
     evt.target.classList.toggle('card__like_active');
   }
 
-  showDeleteButton() {
-    this._deleteButton.classList.add('card__delete-button_active');
-  }
-
   render() {
     this._title = this._content.querySelector('.card__title');
     this._picture = this._content.querySelector('.card__picture');

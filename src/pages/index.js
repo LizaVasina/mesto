@@ -36,6 +36,7 @@ api.getProfileData()
   .then(data => {
   userInfo.setUserInfo(data.name, data.about);
   profileAvatar.src = data.avatar;
+  userInfo.setUserId(data._id);
   })
   .catch(err => {
     console.log(err);
@@ -51,6 +52,9 @@ api.getInitialCards()
           () => {
             popupWithImage.open(card._name, card._link);
           });
+          if (userInfo.getUserId() == cardElement.owner._id) {
+            card.render().querySelector('.card__delete-button').style.display = "block";
+          };
           defaultCardList.addItem(card.render());
         }
       }, gridContainer);
@@ -59,8 +63,6 @@ api.getInitialCards()
   .catch(err => {
     console.log(err);
   });
-
-
 
 // валидация
 const infoFormValidation = new FormValidation(formConfig, formInfo);
@@ -90,7 +92,7 @@ const popupPhotoForm = new PopupWithForm({
     () => {
       popupWithImage.open(cardItem._name, cardItem._link);
     });
-    cardItem.showDeleteButton();
+    cardItem.render().querySelector('.card__delete-button').style.display = "block";
     const newCardAdding = new Section({
       items: [cardItem],
       renderer: () => {
