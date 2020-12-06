@@ -5,6 +5,7 @@ import { FormValidation } from '../scripts/components/FormValidation.js';
 import { Section } from '../scripts/components/Section.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
+import { PopupWithSubmit } from '../scripts/components/PopupWithSubmit.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api.js';
 
@@ -131,6 +132,14 @@ const popupInfoClass = new PopupWithForm({
   });
 popupInfoClass.setEventListeners();
 
+const popupWithSubmit = new PopupWithSubmit({
+  popupSelector: '.popup_type_submit',
+  handleSubmitButton: () => {
+    console.log('сабмит из сабмита');
+    popupWithSubmit.close();
+  }
+});
+popupWithSubmit.setEventListeners();
 
 
 // обработчики
