@@ -52,6 +52,7 @@ api.getInitialCards()
           () => {
             popupWithImage.open(card._name, card._link);
           });
+          card.render().querySelector('.card__like-number').textContent = cardElement.likes.length;
           if (userInfo.getUserId() == cardElement.owner._id) {
             card.render().querySelector('.card__delete-button').style.display = "block";
           };

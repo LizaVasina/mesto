@@ -32,10 +32,7 @@ export class Card {
 
     this._deleteButton.addEventListener('click', this._delete);
 
-    this._likeButton.addEventListener('click', (evt) => {
-      this._like(evt);
-      // this._likeNumber.textContent = Number(this._likeNumber.textContent) + 1;
-    });
+    this._likeButton.addEventListener('click', this._like);
 
     this._popupButton.addEventListener('click', () => this._handleCardClick());
 
