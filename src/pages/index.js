@@ -84,6 +84,9 @@ popupWithImage.setEventListeners();
 const popupPhotoForm = new PopupWithForm({
   popupSelector: '.popup_type_photos',
   handleFormSubmit: () => {
+    console.log(inputPicName.value);
+    console.log(inputLink.value);
+    api.addCard(inputPicName.value, inputLink.value);
     const cardItem = createCard(inputPicName.value, inputLink.value, cardTemplate,
     () => {
       popupWithImage.open(cardItem._name, cardItem._link);
@@ -103,17 +106,17 @@ const popupPhotoForm = new PopupWithForm({
 popupPhotoForm.setEventListeners();
 
 // автоматическое добавление карточек
-const oldDefaultCardList = new Section({
-  items: initialCards,
-  renderer: (cardElement) => {
-    const card = createCard(cardElement.name, cardElement.link, cardTemplate,
-    () => {
-      popupWithImage.open(card._name, card._link);
-    });
-    oldDefaultCardList.addItem(card.render());
-  }
-}, gridContainer);
-oldDefaultCardList.render();
+// const oldDefaultCardList = new Section({
+//   items: initialCards,
+//   renderer: (cardElement) => {
+//     const card = createCard(cardElement.name, cardElement.link, cardTemplate,
+//     () => {
+//       popupWithImage.open(card._name, card._link);
+//     });
+//     oldDefaultCardList.addItem(card.render());
+//   }
+// }, gridContainer);
+// oldDefaultCardList.render();
 
 
 // работа с данными профиля
