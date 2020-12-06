@@ -40,6 +40,7 @@
 @import url(../blocks/card/__picture/card__picture.css);
 @import url(../blocks/card/__popup-button/card__popup-button.css);
 @import url(../blocks/card/__delete-button/card__delete-button.css);
+@import url(../blocks/card/__delete-button/_active/card__delete-button_active.css);
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__like-section/card__like-section.css);

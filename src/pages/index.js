@@ -85,13 +85,12 @@ popupWithImage.setEventListeners();
 const popupPhotoForm = new PopupWithForm({
   popupSelector: '.popup_type_photos',
   handleFormSubmit: () => {
-    console.log(inputPicName.value);
-    console.log(inputLink.value);
     api.addCard(inputPicName.value, inputLink.value);
     const cardItem = createCard(inputPicName.value, inputLink.value, cardTemplate,
     () => {
       popupWithImage.open(cardItem._name, cardItem._link);
     });
+    cardItem.showDeleteButton();
     const newCardAdding = new Section({
       items: [cardItem],
       renderer: () => {
