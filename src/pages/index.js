@@ -13,15 +13,18 @@ import { initialCards,
         formConfig,
         formInfo,
         formPhotos,
+        formAvatar,
+        profileAvatar,
         gridContainer,
         cardTemplate,
         editButton,
         addButton,
+        editAvatarButton,
         inputPicName,
         inputLink } from '../scripts/utils/constants.js';
 
 const userInfo = new UserInfo('.profile__name', '.profile__description');
-const profileAvatar = document.querySelector('.profile__avatar');
+
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-18/',
@@ -71,6 +74,9 @@ infoFormValidation.enableValidation();
 
 const photosFormValidation = new FormValidation(formConfig, formPhotos);
 photosFormValidation.enableValidation();
+
+const avatarFormValidation = new FormValidation(formConfig, formAvatar);
+avatarFormValidation.enableValidation();
 
 //функция создания карточки
 function createCard(name, link, templateSelector, handleCardClick) {
@@ -143,8 +149,22 @@ const popupWithSubmit = new PopupWithSubmit({
 });
 popupWithSubmit.setEventListeners();
 
+const popupAvatarClass = new PopupWithForm({
+  popupSelector: '.popup_type_edit-avatar',
+  handleFormSubmit: (value) => {
+    console.log(value);
+    popupAvatarClass.close();
+  }
+});
+popupAvatarClass.setEventListeners();
 
 // обработчики
+// кнопка редактирования аватара
+editAvatarButton.addEventListener('click', () => {
+  popupAvatarClass.open();
+  avatarFormValidation.enableValidation();
+})
+
 // кнопка редактирования профиля
 editButton.addEventListener('click', () => {
   popupInfoClass.open();
