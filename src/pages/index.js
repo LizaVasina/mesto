@@ -48,9 +48,13 @@ api.getInitialCards()
       const defaultCardList = new Section({
         items: data,
         renderer: (cardElement) => {
-          const card = createCard(cardElement.name, cardElement.link, cardTemplate,
+          const card = createCard(cardElement.name, cardElement.link, cardElement._id, cardTemplate,
           () => {
             popupWithImage.open(card._name, card._link);
+          },
+          () => {
+            //console.log(card.render());
+            popupWithSubmit.open(card);
           });
           card.render().querySelector('.card__like-number').textContent = cardElement.likes.length;
           if (userInfo.getUserId() == cardElement.owner._id) {
@@ -65,6 +69,7 @@ api.getInitialCards()
     console.log(err);
   });
 
+
 // валидация
 const infoFormValidation = new FormValidation(formConfig, formInfo);
 infoFormValidation.enableValidation();
@@ -73,12 +78,14 @@ const photosFormValidation = new FormValidation(formConfig, formPhotos);
 photosFormValidation.enableValidation();
 
 //функция создания карточки
-function createCard(name, link, templateSelector, handleCardClick) {
+function createCard(name, link, id, templateSelector, handleCardClick, handleDeleteButtonClick) {
   return new Card ({
     name: name,
     link: link,
+    id: id,
     templateSelector: templateSelector,
-    handleCardClick: handleCardClick
+    handleCardClick: handleCardClick,
+    handleDeleteButtonClick: handleDeleteButtonClick
   });
 };
 
@@ -88,11 +95,17 @@ popupWithImage.setEventListeners();
 const popupPhotoForm = new PopupWithForm({
   popupSelector: '.popup_type_photos',
   handleFormSubmit: () => {
-    api.addCard(inputPicName.value, inputLink.value);
-    const cardItem = createCard(inputPicName.value, inputLink.value, cardTemplate,
+    api.addCard(inputPicName.value, inputLink.value)
+      .then(res => {
+        const cardItem = createCard(inputPicName.value, inputLink.value, res._id, cardTemplate,
     () => {
       popupWithImage.open(cardItem._name, cardItem._link);
+    },
+    () => {
+      console.log('удаляемся');
+      popupWithSubmit.open(cardItem);
     });
+    console.log(cardItem);
     cardItem.render().querySelector('.card__delete-button').style.display = "block";
     const newCardAdding = new Section({
       items: [cardItem],
@@ -104,6 +117,8 @@ const popupPhotoForm = new PopupWithForm({
 
     popupPhotoForm.close();
     formPhotos.reset();
+      });
+
   }
 });
 popupPhotoForm.setEventListeners();
@@ -136,8 +151,9 @@ popupInfoClass.setEventListeners();
 
 const popupWithSubmit = new PopupWithSubmit({
   popupSelector: '.popup_type_submit',
-  handleSubmitButton: () => {
-    console.log('сабмит из сабмита');
+  handleSubmitButton: (card) => {
+    api.deleteCard(card.id);
+    card._deleteButton.closest('.card').remove();
     popupWithSubmit.close();
   }
 });

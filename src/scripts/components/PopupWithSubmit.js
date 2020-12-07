@@ -7,8 +7,13 @@ export class PopupWithSubmit extends Popup {
     this._submitButton = this._popup.querySelector('.popup__button_type_submit-action');
   }
 
+  open(element) {
+    super.open();
+    this.element = element;
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._submitButton.addEventListener('click', this._handleSubmitButton);
+    this._submitButton.addEventListener('click', () => this._handleSubmitButton(this.element));
   }
 }

@@ -1,15 +1,17 @@
 export class Card {
-  constructor({name, link, templateSelector, handleCardClick}) {
+  constructor({name, link, id, templateSelector, handleCardClick, handleDeleteButtonClick}) {
     this._name = name;
     this._link = link;
+    this.id = id;
     this._template = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteButtonClick = handleDeleteButtonClick.bind(this);
 
     this._content = this._template.content.cloneNode(true);
-    this._deleteButton = this._content.querySelector('.card__delete-button');
+
   }
 
-  _delete (evt) {
+  _delete () {
     evt.target.closest('.card').remove();
   }
 
@@ -22,6 +24,7 @@ export class Card {
     this._picture = this._content.querySelector('.card__picture');
 
     this._likeButton = this._content.querySelector('.card__like');
+    this._deleteButton = this._content.querySelector('.card__delete-button');
     this._popupButton = this._content.querySelector('.card__popup-button');
 
     this._likeNumber = this._content.querySelector('.card__like-number');
@@ -30,7 +33,7 @@ export class Card {
     this._picture.alt = this._name;
     this._picture.src = this._link;
 
-    this._deleteButton.addEventListener('click', this._delete);
+    this._deleteButton.addEventListener('click', this._handleDeleteButtonClick);
 
     this._likeButton.addEventListener('click', this._like);
 

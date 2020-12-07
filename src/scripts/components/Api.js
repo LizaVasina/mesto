@@ -35,6 +35,20 @@ export class Api {
     })
   }
 
+  deleteCard(cardId) {
+    return fetch(`${this._url}cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
   getProfileData() {
     return fetch(`${this._url}users/me`, {
       headers: this._headers
