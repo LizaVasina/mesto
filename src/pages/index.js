@@ -34,6 +34,14 @@ const api = new Api({
   }
 });
 
+function renderLoading(isLoading, buttonSelector, defaultMessage) {
+  if (isLoading) {
+    document.querySelector(buttonSelector).textContent = 'Сохранение...';
+  } else {
+    document.querySelector(buttonSelector).textContent = defaultMessage;
+  }
+}
+
 // получение информации о профиле с сервера
 api.getProfileData()
   .then(data => {
@@ -100,6 +108,7 @@ popupWithImage.setEventListeners();
 const popupPhotoForm = new PopupWithForm({
   popupSelector: '.popup_type_photos',
   handleFormSubmit: () => {
+    renderLoading(true, '.popup__button_type_create', '');
     api.addCard(inputPicName.value, inputLink.value)
       .then(res => {
         const cardItem = createCard(inputPicName.value, inputLink.value, res._id, cardTemplate,
@@ -120,7 +129,11 @@ const popupPhotoForm = new PopupWithForm({
 
     popupPhotoForm.close();
     formPhotos.reset();
-      });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => renderLoading(false, '.popup__button_type_create', 'Создать'));
 
   }
 });
@@ -145,9 +158,17 @@ popupPhotoForm.setEventListeners();
 const popupInfoClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
   handleFormSubmit: (values) => {
-    userInfo.setUserInfo(values.name, values.description);
-    api.updateProfileData(values.name, values.description);
-    popupInfoClass.close();
+    renderLoading(true, '.popup__button_type_save', '')
+    api.updateProfileData(values.name, values.description)
+      .then(() => {
+        userInfo.setUserInfo(values.name, values.description);
+        popupInfoClass.close();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => renderLoading(false, '.popup__button_type_save', 'Сохранить'));
+
   }
   });
 popupInfoClass.setEventListeners();
@@ -155,9 +176,14 @@ popupInfoClass.setEventListeners();
 const popupWithSubmit = new PopupWithSubmit({
   popupSelector: '.popup_type_submit',
   handleSubmitButton: (card) => {
-    api.deleteCard(card.id);
-    card.delete();
-    popupWithSubmit.close();
+    api.deleteCard(card.id)
+      .then(() => {
+        card.delete();
+        popupWithSubmit.close();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 });
 popupWithSubmit.setEventListeners();
@@ -165,9 +191,16 @@ popupWithSubmit.setEventListeners();
 const popupAvatarClass = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
   handleFormSubmit: (value) => {
-    profileAvatar.src = value.link;
-    api.updateProfileAvatar(value.link);
-    popupAvatarClass.close();
+    renderLoading(true, '.popup__button_type_update', '')
+    api.updateProfileAvatar(value.link)
+      .then(() => {
+        profileAvatar.src = value.link;
+        popupAvatarClass.close();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => renderLoading(false, '.popup__button_type_update', 'Сохранить'));
   }
 });
 popupAvatarClass.setEventListeners();
