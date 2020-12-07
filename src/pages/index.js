@@ -142,8 +142,9 @@ popupInfoClass.setEventListeners();
 
 const popupWithSubmit = new PopupWithSubmit({
   popupSelector: '.popup_type_submit',
-  handleSubmitButton: () => {
-    console.log('сабмит из сабмита');
+  handleSubmitButton: (card) => {
+    api.deleteCard(card.id);
+    card.delete();
     popupWithSubmit.close();
   }
 });
@@ -152,7 +153,8 @@ popupWithSubmit.setEventListeners();
 const popupAvatarClass = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
   handleFormSubmit: (value) => {
-    console.log(value);
+    profileAvatar.src = value.link;
+    api.updateProfileAvatar(value.link);
     popupAvatarClass.close();
   }
 });
