@@ -71,6 +71,30 @@ export class Api {
         about: newAbout
       })
     })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
+  updateProfileAvatar(newAvatar) {
+    return fetch(`${this._url}users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: newAvatar
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
   }
 
 }
