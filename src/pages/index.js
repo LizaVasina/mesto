@@ -53,7 +53,6 @@ api.getInitialCards()
             popupWithImage.open(card._name, card._link);
           },
           () => {
-            //console.log(card.render());
             popupWithSubmit.open(card);
           });
           card.render().querySelector('.card__like-number').textContent = cardElement.likes.length;
@@ -102,10 +101,8 @@ const popupPhotoForm = new PopupWithForm({
       popupWithImage.open(cardItem._name, cardItem._link);
     },
     () => {
-      console.log('удаляемся');
       popupWithSubmit.open(cardItem);
     });
-    console.log(cardItem);
     cardItem.render().querySelector('.card__delete-button').style.display = "block";
     const newCardAdding = new Section({
       items: [cardItem],
@@ -153,7 +150,7 @@ const popupWithSubmit = new PopupWithSubmit({
   popupSelector: '.popup_type_submit',
   handleSubmitButton: (card) => {
     api.deleteCard(card.id);
-    card._deleteButton.closest('.card').remove();
+    card.delete();
     popupWithSubmit.close();
   }
 });

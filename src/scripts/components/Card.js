@@ -11,8 +11,8 @@ export class Card {
 
   }
 
-  _delete () {
-    evt.target.closest('.card').remove();
+  delete () {
+    this._deleteButton.closest('.card').remove();
   }
 
   _like (evt) {
