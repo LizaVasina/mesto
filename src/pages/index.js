@@ -9,8 +9,7 @@ import { PopupWithSubmit } from '../scripts/components/PopupWithSubmit.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api.js';
 
-import { initialCards,
-        formConfig,
+import {formConfig,
         formInfo,
         formPhotos,
         formAvatar,
@@ -24,7 +23,6 @@ import { initialCards,
         inputLink } from '../scripts/utils/constants.js';
 
 const userInfo = new UserInfo('.profile__name', '.profile__description');
-
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-18/',
@@ -185,27 +183,11 @@ const popupPhotoForm = new PopupWithForm({
         console.log(err);
       })
       .finally(() => renderLoading(false, '.popup__button_type_create', 'Создать'));
-
   }
 });
 popupPhotoForm.setEventListeners();
 
-// автоматическое добавление карточек
-// const oldDefaultCardList = new Section({
-//   items: initialCards,
-//   renderer: (cardElement) => {
-//     const card = createCard(cardElement.name, cardElement.link, cardTemplate,
-//     () => {
-//       popupWithImage.open(card._name, card._link);
-//     });
-//     oldDefaultCardList.addItem(card.render());
-//   }
-// }, gridContainer);
-// oldDefaultCardList.render();
-
-
 // работа с данными профиля
-
 const popupInfoClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
   handleFormSubmit: (values) => {
@@ -224,6 +206,7 @@ const popupInfoClass = new PopupWithForm({
   });
 popupInfoClass.setEventListeners();
 
+// попап подтверждения действия
 const popupWithSubmit = new PopupWithSubmit({
   popupSelector: '.popup_type_submit',
   handleSubmitButton: (card) => {
@@ -239,6 +222,7 @@ const popupWithSubmit = new PopupWithSubmit({
 });
 popupWithSubmit.setEventListeners();
 
+// попап обновления аватарки
 const popupAvatarClass = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
   handleFormSubmit: (value) => {

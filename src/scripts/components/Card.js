@@ -17,34 +17,6 @@ export class Card {
     this._deleteButton.closest('.card').remove();
   }
 
-  test () {
-    console.log(this._likeButton);
-  }
-
-  _like(evt) {
-    if (evt.target.classList.contains('card__like_active')) {
-      this._api.removeLike(this.id)
-        .then(res => {
-          evt.target.classList.toggle('card__like_active');
-          console.log(':(');
-          this._likeNumber.textContent = res.likes.length;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else {
-      this._api.setLike(this.id)
-        .then(res => {
-          evt.target.classList.toggle('card__like_active');
-          console.log(':(');
-          this._likeNumber.textContent = res.likes.length;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }
-
   setNumberOfLikes(amount) {
     this._likeNumber.textContent = amount;
   }
@@ -53,30 +25,14 @@ export class Card {
     this.likeButton.classList.toggle('card__like_active');
   }
 
-  setLike() {
-    this.likeButton.classList.add('card__like_active');
-  }
-
-  removeLike() {
-    this._likeButton.classList.remove('card__like_active');
-  }
-
-  _toggleLike (evt) {
-
-  }
-
   render() {
     this._title = this._content.querySelector('.card__title');
     this._picture = this._content.querySelector('.card__picture');
-
 
     this._deleteButton = this._content.querySelector('.card__delete-button');
     this._popupButton = this._content.querySelector('.card__popup-button');
     this._likeNumber = this._content.querySelector('.card__like-number');
     this.likeButton = this._content.querySelector('.card__like');
-
-
-
 
     this._title.textContent = this._name;
     this._picture.alt = this._name;
