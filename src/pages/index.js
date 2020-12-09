@@ -42,6 +42,11 @@ function renderLoading(isLoading, buttonSelector, defaultMessage) {
   }
 }
 
+// проверка на наличие лайка
+function hasMyLike(myId) {
+  return like => like._id === myId;
+}
+
 // получение информации о профиле с сервера
 api.getProfileData()
   .then(data => {
@@ -65,7 +70,31 @@ api.getInitialCards()
           },
           () => {
             popupWithSubmit.open(card);
+          },
+          () => {
+            if (card.likeButton.classList.contains('card__like_active')) {
+              api.removeLike(card.id)
+                .then(res => {
+                  card.toggleLike();
+                  card.setNumberOfLikes(res.likes.length);
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            } else {
+              api.setLike(card.id)
+                .then(res => {
+                  card.toggleLike();
+                  card.setNumberOfLikes(res.likes.length);
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            };
           });
+          if (cardElement.likes.some(hasMyLike(userInfo.getUserId()))) {
+            card.render().querySelector('.card__like').classList.add('card__like_active');
+          }
           card.render().querySelector('.card__like-number').textContent = cardElement.likes.length;
           if (userInfo.getUserId() == cardElement.owner._id) {
             card.render().querySelector('.card__delete-button').style.display = "block";
@@ -91,14 +120,15 @@ const avatarFormValidation = new FormValidation(formConfig, formAvatar);
 avatarFormValidation.enableValidation();
 
 //функция создания карточки
-function createCard(name, link, id, templateSelector, handleCardClick, handleDeleteButtonClick) {
+function createCard(name, link, id, templateSelector, handleCardClick, handleDeleteButtonClick, handleLikeButtonClick) {
   return new Card ({
     name: name,
     link: link,
     id: id,
     templateSelector: templateSelector,
     handleCardClick: handleCardClick,
-    handleDeleteButtonClick: handleDeleteButtonClick
+    handleDeleteButtonClick: handleDeleteButtonClick,
+    handleLikeButtonClick: handleLikeButtonClick
   });
 };
 
@@ -117,6 +147,27 @@ const popupPhotoForm = new PopupWithForm({
     },
     () => {
       popupWithSubmit.open(cardItem);
+    },
+    () => {
+      if (cardItem.likeButton.classList.contains('card__like_active')) {
+        api.removeLike(cardItem.id)
+          .then(res => {
+            cardItem.toggleLike();
+            cardItem.setNumberOfLikes(res.likes.length);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        api.setLike(cardItem.id)
+          .then(res => {
+            cardItem.toggleLike();
+            cardItem.setNumberOfLikes(res.likes.length);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      };
     });
     cardItem.render().querySelector('.card__delete-button').style.display = "block";
     const newCardAdding = new Section({
