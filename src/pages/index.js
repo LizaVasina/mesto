@@ -77,7 +77,6 @@ Promise.all([
     console.log(err);
   });
 
-
 // валидация
 const infoFormValidation = new FormValidation(formConfig, formInfo);
 infoFormValidation.enableValidation();
