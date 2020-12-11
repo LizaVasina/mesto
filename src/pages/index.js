@@ -45,64 +45,62 @@ function hasMyLike(myId) {
   return like => like._id === myId;
 }
 
-// получение информации о профиле с сервера
-api.getProfileData()
-  .then(data => {
-  userInfo.setUserInfo(data.name, data.about);
-  profileAvatar.src = data.avatar;
-  userInfo.setUserId(data._id);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+// профиль и карточки с сервера
+Promise.all([
+  api.getProfileData(),
+  api.getInitialCards(),
+])
+  .then(([userData, initialCards]) => {
+    // получение информации о профиле с сервера
+    userInfo.setUserInfo(userData.name, userData.about);
+    profileAvatar.src = userData.avatar;
+    userInfo.setUserId(userData._id);
 
-// получение карточек с сервера
-api.getInitialCards()
-  .then(data => {
-      const defaultCardList = new Section({
-        items: data,
-        renderer: (cardElement) => {
-          const card = createCard(cardElement.name, cardElement.link, cardElement._id, cardTemplate,
-          () => {
-            popupWithImage.open(card._name, card._link);
-          },
-          () => {
-            popupWithSubmit.open(card);
-          },
-          () => {
-            if (card.likeButton.classList.contains('card__like_active')) {
-              api.removeLike(card.id)
-                .then(res => {
-                  card.toggleLike();
-                  card.setNumberOfLikes(res.likes.length);
-                })
-                .catch(err => {
-                  console.log(err);
-                });
-            } else {
-              api.setLike(card.id)
-                .then(res => {
-                  card.toggleLike();
-                  card.setNumberOfLikes(res.likes.length);
-                })
-                .catch(err => {
-                  console.log(err);
-                });
-            };
-          });
-          if (cardElement.likes.some(hasMyLike(userInfo.getUserId()))) {
-            card.render().querySelector('.card__like').classList.add('card__like_active');
-          }
-          card.render().querySelector('.card__like-number').textContent = cardElement.likes.length;
-          if (userInfo.getUserId() == cardElement.owner._id) {
-            card.render().querySelector('.card__delete-button').style.display = "block";
+    // получение карточек с сервера
+    const defaultCardList = new Section({
+      items: initialCards,
+      renderer: (cardElement) => {
+        const card = createCard(cardElement.name, cardElement.link, cardElement._id, cardTemplate,
+        () => {
+          popupWithImage.open(card._name, card._link);
+        },
+        () => {
+          popupWithSubmit.open(card);
+        },
+        () => {
+          if (card.likeButton.classList.contains('card__like_active')) {
+            api.removeLike(card.id)
+              .then(res => {
+                card.toggleLike();
+                card.setNumberOfLikes(res.likes.length);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          } else {
+            api.setLike(card.id)
+              .then(res => {
+                card.toggleLike();
+                card.setNumberOfLikes(res.likes.length);
+              })
+              .catch(err => {
+                console.log(err);
+              });
           };
-          defaultCardList.addItem(card.render());
+        });
+        if (cardElement.likes.some(hasMyLike(userInfo.getUserId()))) {
+          card.render().querySelector('.card__like').classList.add('card__like_active');
         }
-      }, gridContainer);
-      defaultCardList.render();
+        card.render().querySelector('.card__like-number').textContent = cardElement.likes.length;
+        if (userInfo.getUserId() == cardElement.owner._id) {
+          card.render().querySelector('.card__delete-button').style.display = "block";
+        };
+        defaultCardList.addItem(card.render());
+      }
+    }, gridContainer);
+    defaultCardList.render();
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
 
