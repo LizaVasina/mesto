@@ -60,34 +60,7 @@ Promise.all([
     const defaultCardList = new Section({
       items: initialCards,
       renderer: (cardElement) => {
-        const card = createCard(cardElement.name, cardElement.link, cardElement._id, cardTemplate,
-        () => {
-          popupWithImage.open(card._name, card._link);
-        },
-        () => {
-          popupWithSubmit.open(card);
-        },
-        () => {
-          if (card.likeButton.classList.contains('card__like_active')) {
-            api.removeLike(card.id)
-              .then(res => {
-                card.toggleLike();
-                card.setNumberOfLikes(res.likes.length);
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          } else {
-            api.setLike(card.id)
-              .then(res => {
-                card.toggleLike();
-                card.setNumberOfLikes(res.likes.length);
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          };
-        });
+        const card = createCard(cardElement.name, cardElement.link, cardElement._id, cardTemplate);
         if (cardElement.likes.some(hasMyLike(userInfo.getUserId()))) {
           card.render().querySelector('.card__like').classList.add('card__like_active');
         }
@@ -116,16 +89,41 @@ const avatarFormValidation = new FormValidation(formConfig, formAvatar);
 avatarFormValidation.enableValidation();
 
 //функция создания карточки
-function createCard(name, link, id, templateSelector, handleCardClick, handleDeleteButtonClick, handleLikeButtonClick) {
-  return new Card ({
-    name: name,
-    link: link,
-    id: id,
-    templateSelector: templateSelector,
-    handleCardClick: handleCardClick,
-    handleDeleteButtonClick: handleDeleteButtonClick,
-    handleLikeButtonClick: handleLikeButtonClick
+function createCard(name, link, id, templateSelector) {
+  const card = new Card ({
+    name,
+    link,
+    id,
+    templateSelector,
+    handleCardClick: () => {
+      popupWithImage.open(name, link);
+    },
+    handleDeleteButtonClick: () => {
+      popupWithSubmit.open(card);
+    },
+    handleLikeButtonClick: () => {
+      if (card.likeButton.classList.contains('card__like_active')) {
+        api.removeLike(card.id)
+          .then(res => {
+            card.toggleLike();
+            card.setNumberOfLikes(res.likes.length);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        api.setLike(card.id)
+          .then(res => {
+            card.toggleLike();
+            card.setNumberOfLikes(res.likes.length);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      };
+    }
   });
+  return card;
 };
 
 const popupWithImage = new PopupWithImage('.pic-popup');
@@ -137,51 +135,24 @@ const popupPhotoForm = new PopupWithForm({
     renderLoading(true, '.popup__button_type_create', '');
     api.addCard(inputPicName.value, inputLink.value)
       .then(res => {
-        const cardItem = createCard(inputPicName.value, inputLink.value, res._id, cardTemplate,
-    () => {
-      popupWithImage.open(cardItem._name, cardItem._link);
-    },
-    () => {
-      popupWithSubmit.open(cardItem);
-    },
-    () => {
-      if (cardItem.likeButton.classList.contains('card__like_active')) {
-        api.removeLike(cardItem.id)
-          .then(res => {
-            cardItem.toggleLike();
-            cardItem.setNumberOfLikes(res.likes.length);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      } else {
-        api.setLike(cardItem.id)
-          .then(res => {
-            cardItem.toggleLike();
-            cardItem.setNumberOfLikes(res.likes.length);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      };
-    });
-    cardItem.render().querySelector('.card__delete-button').style.display = "block";
-    const newCardAdding = new Section({
-      items: [cardItem],
-      renderer: () => {
-        newCardAdding.addItem(cardItem.render());
-      }
-    }, gridContainer);
-    newCardAdding.render();
+        const cardItem = createCard(inputPicName.value, inputLink.value, res._id, cardTemplate);
+        cardItem.render().querySelector('.card__delete-button').style.display = "block";
+        const newCardAdding = new Section({
+          items: [cardItem],
+          renderer: () => {
+            newCardAdding.addItem(cardItem.render());
+          }
+        }, gridContainer);
+        newCardAdding.render();
 
-    popupPhotoForm.close();
-    formPhotos.reset();
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .finally(() => renderLoading(false, '.popup__button_type_create', 'Создать'));
-  }
+        popupPhotoForm.close();
+        formPhotos.reset();
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .finally(() => renderLoading(false, '.popup__button_type_create', 'Создать'));
+      }
 });
 popupPhotoForm.setEventListeners();
 
